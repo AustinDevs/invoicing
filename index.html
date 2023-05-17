@@ -33,28 +33,27 @@
       </div>
       </div>
       <code class="my-5"><pre id="embed-code" class="bg-light p-3 rounded"></pre></code>
-      <iframe id="paycove-iframe" src="https://paycove.io/payment-scheduler?start_date_range[]=2023-05-22&start_date_range[]=2100-01-01&final_date=2023-08-15&total=4290&frequency[]=monthly&frequency[]=2weekly&frequency[]=weekly&down_payment_amount=500&fee=300.04&down_payment_type=Fixed" style="width: 1px; min-width: 100%; border: 0"></iframe>
+      <iframe id="paycove-iframe" src="https://staging.paycove.io/payment-scheduler?start_date_range[]=2023-05-22&start_date_range[]=2100-01-01&final_date=2023-08-15&total=4290&frequency[]=monthly&frequency[]=2weekly&frequency[]=weekly&down_payment_amount=500&fee=300.04&down_payment_type=Fixed" style="width: 1px; min-width: 100%; border: 0"></iframe>
+      <script src="https://staging.paycove.io/js/embed.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.2/qs.min.js" integrity="sha512-vCegEXqPUYpZsTGz2lk0jaQ1psxtFeniVJACAXhMVxuoYa/N4nZkjoVFOxLwP7uGeQOoemiz7DQrIpRTj4IBPw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-      <script src="./script.js"></script>
       <script>
-        window.addEventListener('message', (e) => {
-          const { data } = e;
-          document.querySelector('#output').innerText = JSON.stringify(data, null, 2)
-        })
+        new Paycove('#paycove-iframe', {
+          onMessage: ({ message }) => document.querySelector('#output').innerText = JSON.stringify(message.payments, null, 2)
+        });
         const handler = () => {
           const obj = {};
           [...document.querySelectorAll('input')].forEach(el => {
             obj[el.id] = el.id === 'start_date_range' ? [el.value, el.value] : el.value
           })
-          const iframeSrc = `https://paycove.io/payment-scheduler?${Qs.stringify(obj, { arrayFormat: 'brackets', encode: false })}&down_payment_type=Fixed&frequency[]=monthly&frequency[]=2weekly&frequency[]=weekly`;
+          const iframeSrc = `https://staging.paycove.io/payment-scheduler?${Qs.stringify(obj, { arrayFormat: 'brackets', encode: false })}&down_payment_type=Fixed&frequency[]=monthly&frequency[]=2weekly&frequency[]=weekly`;
           document.querySelector('#paycove-iframe').src = iframeSrc;
           document.querySelector('#embed-code').innerHTML = `&lt;iframe id=&quot;paycove-iframe&quot; src=&quot;${iframeSrc}&quot; style=&quot;width: 1px; min-width: 100%; border: 0&quot;&gt;&lt;/iframe&gt;
-&lt;script src=&quot;https://austindevs.github.io/calculator/script.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://staging.paycove.io/js/embed.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-  window.addEventListener('message', (e) =&gt; {
-    console.log(e.data)
-  })
+  new Paycove('#paycove-iframe', {
+    onMessage: ({ message }) =&gt; console.log(message)
+  });
 &lt;/script&gt;`;
         };
         [...document.querySelectorAll('input')].forEach(el => el.addEventListener('change', handler))

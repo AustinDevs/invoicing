@@ -9,66 +9,44 @@
   <body>
     <main class="container pt-5">
       <h1>Payment Plan Calculator Embed</h1>
-      <div class="row mt-5 mb-3">
-        <div class="col-lg-9">
-          <div class="row">
-            <div class="mb-3 col-sm-12 col-md-8 col-lg-8">
-              <div class="text-center">
-                <label for="start_date_range[0]" class="form-label">Start Date Range</label>
-              </div>
-              <div class="d-flex">
-                <input type="date" class="form-control" id="start_date_range[0]" value="2023-05-30">
-                <span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                <input type="date" class="form-control" id="start_date_range[1]" value="2023-05-30">
-              </div>
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="final_date" class="form-label">Final Date</label>
-              <input type="date" class="form-control" id="final_date" value="2023-08-30">
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="down_payment_type" class="form-label">Down Payment Type</label>
-              <select class="form-select" id="down_payment_type">
-                <option selected value="Fixed">Fixed</option>
-                <option value="Not Required">Not Required</option>
-                <option value="Minimum">Minimum</option>
-              </select>
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="down_payment_amount" class="form-label">Down Payment</label>
-              <input type="number" step="0.01" class="form-control" id="down_payment_amount" value="1000.00">
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="down_payment_calc" class="form-label">Down Payment Calculation</label>
-              <select class="form-select" id="down_payment_calc">
-                <option selected value="amount">Amount</option>
-                <option value="percent">Percent</option>
-              </select>
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="total" class="form-label">Total (w/o fees)</label>
-              <input type="number" step="0.01" class="form-control" id="total" value="3000.00">
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="fee" class="form-label">Fee</label>
-              <input type="number" step="0.01" class="form-control" id="fee" value="200.00">
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="fee_calc" class="form-label">Fee Calculation</label>
-              <select class="form-select" id="fee_calc">
-                <option selected value="amount">Amount</option>
-                <option value="percent">Percent</option>
-              </select>
-            </div>
-            <div class="mb-3 col-sm-6 col-md-4 col-lg-4">
-              <label for="primary_color" class="form-label">Primary Color</label>
-              <input type="color" value="#3273dc" id="primary_color">
-            </div>
+      <div class="row mt-5">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-6">
+          <div class="text-center">
+            <label for="start_date_range[0]" class="form-label">Start Date Range</label>
+          </div>
+          <div class="d-flex">
+            <input type="date" class="form-control" id="start_date_range[0]" value="2023-05-30">
+            <span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+            <input type="date" class="form-control" id="start_date_range[1]" value="2023-05-30">
           </div>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="mb-3 col-sm-6 col-md-3 col-lg-3">
+          <label for="final_date" class="form-label">Final Date</label>
+          <input type="date" class="form-control" id="final_date" value="2023-08-30">
+        </div>
+        <div class="mb-3 col-sm-6 col-md-3 col-lg-3">
+          <label for="down_payment_amount" class="form-label">Down Payment</label>
+          <input type="number" step="0.01" class="form-control" id="down_payment_amount" value="1000.00">
+        </div>
+        <div class="mb-3 col-sm-6 col-md-3 col-lg-3">
+          <label for="down_payment_type" class="form-label">Down Payment Type</label>
+          <select class="form-select" id="down_payment_type">
+            <option selected value="Fixed">Fixed</option>
+            <option value="Not Required">Not Required</option>
+            <option value="Minimum">Minimum</option>
+          </select>
+        </div>
+        <div class="mb-3 col-sm-6 col-md-3 col-lg-3">
+          <label for="total" class="form-label">Total (w/o fees)</label>
+          <input type="number" step="0.01" class="form-control" id="total" value="3000.00">
+        </div>
+        <div class="mb-3 col-sm-6 col-md-3 col-lg-3">
+          <label for="fee" class="form-label">Fees</label>
+          <input type="number" step="0.01" class="form-control" id="fee" value="200.00">
+        </div>
+        <div class="mb-3 col-sm-6 col-md-3 col-lg-3">
           <label for="frequency" class="form-label">Payment Frequency (multi)</label>
-          <select class="form-select" multiple id="frequency" size="6" required>
+          <select class="form-select" multiple id="frequency" size="6">
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
             <option value="2weekly" selected>Bi-weekly</option>
@@ -93,10 +71,9 @@
             el.id === 'frequency' && (obj.frequency = Array.from(document.querySelectorAll('#frequency option:checked')).map(el => el.value))
             el.id === 'start_date_range[0]' && (obj.start_date_range[0] = el.value);
             el.id === 'start_date_range[1]' && (obj.start_date_range[1] = el.value);
-            el.id === 'primary_color' && (obj.primary_color = encodeURIComponent(el.value));
-            !['start_date_range[0]', 'start_date_range[1]', 'frequency', 'primary_color'].includes(el.id) && (obj[el.id] = el.value);
+            !['start_date_range[0]', 'start_date_range[1]', 'frequency'].includes(el.id) && (obj[el.id] = el.value);
           })
-          const iframeSrc = `https://staging.paycove.io/payment-scheduler?${Qs.stringify(obj, { arrayFormat: 'brackets', encode: false })}`;
+          const iframeSrc = `https://paycove.io/payment-scheduler?${Qs.stringify(obj, { arrayFormat: 'brackets', encode: false })}`;
           document.querySelector('#paycove-iframe').src = iframeSrc;
           document.querySelector('#embed-code').innerHTML = `&lt;iframe id=&quot;paycove-iframe&quot; src=&quot;${iframeSrc}&quot; scrolling=&quot;no&quot; style=&quot;width: 1px; min-width: 100%; border: 0; overflow: hidden;&quot;&gt;&lt;/iframe&gt;
 &lt;script src=&quot;https://paycove.io/js/embed.js&quot;&gt;&lt;/script&gt;
@@ -106,8 +83,7 @@
   });
 &lt;/script&gt;`;
         };
-        [...document.querySelectorAll('input:not(#primary_color), select')].forEach(el => el.addEventListener('change', handler))
-        document.querySelector('#primary_color').addEventListener('input', handler);
+        [...document.querySelectorAll('input, select')].forEach(el => el.addEventListener('change', handler))
         handler()
       </script>
       <code class="my-5 text-success"><pre id="output" class="bg-light p-3 rounded"></pre></code>

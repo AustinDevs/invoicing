@@ -184,9 +184,14 @@
           document.querySelector('#embed-code').innerHTML = `&lt;iframe id=&quot;paycove-iframe&quot; src=&quot;${iframeSrc}&quot; scrolling=&quot;no&quot; style=&quot;width: 1px; min-width: 100%; border: 0; overflow: hidden;&quot;&gt;&lt;/iframe&gt;
 &lt;script src=&quot;https://staging.paycove.io/js/embed.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-  ${submittable ? `new Paycove('#paycove-iframe');`: `new Paycove('#paycove-iframe', {
-    onMessage: ({ message }) =&gt; console.log(message)
-  });`}
+  const paycoveInt = setInterval(() => {
+    if (Paycove) {
+      ${submittable ? `new Paycove('#paycove-iframe');`: `new Paycove('#paycove-iframe', {
+        onMessage: ({ message }) =&gt; console.log(message)
+      });`}
+      clearInterval(paycoveInt);
+    }
+  }, 1000);
 &lt;/script&gt;`;
         };
         const debouncedHandler = _.debounce(handler, 1000);

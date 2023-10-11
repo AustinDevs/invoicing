@@ -16,7 +16,7 @@ https://feature.paycove.io/checkout-builder-form?account_id=4ed8191f5a087c037a54
 * `full_name`
 * `email`
 
-https://feature.paycove.io/checkout-builder-form?account_id=4ed8191f5a087c037a54205f03b5239a&adjustable_amount=true&email=kevin@paycove.com&full_name=Kevin%20Colten
+https://feature.paycove.io/checkout-builder-form?account_id=4ed8191f5a087c037a54205f03b5239a&adjustable_amount=true&email=kevin@paycove.io&full_name=Kevin%20Colten
 
 ## Fill Amount Information
 * `account_id` **required*
